@@ -56,8 +56,9 @@ def train(epochs, net, batch_size, model_name):
             dataframe.to_csv(loss_csv, index=False)
 
         net.eval()
-        correct = 0
+
         with torch.no_grad():
+            correct = 0
             for images, labels in test_loader:
                 images = images.to(device)
                 labels = labels.to(device)
@@ -69,13 +70,13 @@ def train(epochs, net, batch_size, model_name):
             accuracy = correct / len(test_dataset)
             if acc_max < accuracy:
                 acc_max = accuracy
-                torch.save(net, "{}_max_acc.pth".format(model_name))
+                torch.save(net, "{}_max_acc_{}.pth".format(model_name, acc_max))
             print(f'Test Accuracy: {accuracy:.4f}')
 
 if __name__ == '__main__':
 
     epochs = 60
-    net = customModel()
-    batch_size = 32
-    model_name = "VGG16"
+    model_name = "resnet152"
+    net = customModel(model_name=model_name)
+    batch_size = 16
     train(epochs=epochs, net=net, batch_size=batch_size, model_name=model_name)

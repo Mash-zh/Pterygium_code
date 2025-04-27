@@ -61,10 +61,13 @@ class class_dataset(Dataset):
         return len(self.index_arry)
 
 if __name__ == '__main__':
-    data_path = "../../data/"
-    data_class ="train"
-    train_label_path ="train_classification_label.xlsx"
-    train_dataset = class_dataset(data_path, data_class, train_label_path)
-    img, label = train_dataset.__getitem__(2)
-    print(img, label)
+    pass
+    # x = (y = 2)
+    # data_path = "../../data/"
+    # data_class ="train"
+    # train_label_path ="train_classification_label.xlsx"
+    # train_dataset = class_dataset(data_path, data_class, train_label_path)
+    # img, label = train_dataset.__getitem__(2)
+    # print(img, label)
     # print(len(train_dataset))
+
