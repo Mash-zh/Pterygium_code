@@ -46,10 +46,23 @@ if __name__ == '__main__':
     model = torch.load('VGG16_max_acc_0.9555555555555556.pth', weights_only=False)
     model = model.to(device)
 
+    # 创建列表存储结果
+    results = []
+    
     with torch.no_grad():
-        correct = 0
         for images, name in valid_loader:
             images = images.to(device)
             outputs = model(images)  # Forward pass
             _, predicted = torch.max(outputs, 1)  # Get the class with the highest probability
-            print(predicted.item(), name[0])
+            # 获取样本编号（去掉文件扩展名）
+            sample_id = os.path.splitext(name[0])[0]
+            # 获取预测类别
+            predicted_class = predicted.item()
+            # 将结果添加到列表中
+            results.append([sample_id, predicted_class])
+            print(predicted_class, name[0])
+    
+    # 创建DataFrame并保存到Excel
+    df = pd.DataFrame(results, columns=['样本编号', '预测类别'])
+    df.to_excel('Classification_Results.xlsx', index=False)
+    print("预测结果已保存到 Classification_Results.xlsx")
