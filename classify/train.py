@@ -76,7 +76,7 @@ def train(epochs, net, batch_size, model_name):
 if __name__ == '__main__':
 
     epochs = 60
-    model_name = "resnet152"
+    model_name = "VGG16"
     net = customModel(model_name=model_name)
     batch_size = 16
     train(epochs=epochs, net=net, batch_size=batch_size, model_name=model_name)
